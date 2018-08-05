@@ -65,8 +65,7 @@ function routerHandle(paths) {
 const initRoute = {
   "/": {
     component: () => import('../layout/BasicLayout.vue'),
-    meta: {},
-    redirect: '/home',
+    meta: {}
   },
   "/home": {
     component: () => import('../views/home/home.vue'),
@@ -98,13 +97,35 @@ const initRoute = {
   }
 }
 
-const menuData = getFlatMenuData(getMenuData()) // 树形结构转换成平级
+const metaData = getMenuData()
+const menuData = getFlatMenuData(metaData) // 树形结构转换成平级
 const routerConfig = getFinishRoute() // eslint-disable-line
+
+/**
+ * 根据菜单取得重定向地址.
+ */
+const redirectData = []
+const getRedirect = item => {
+  if (item && item.children) {
+    if (item.children[0] && item.children[0].path) {
+      redirectData.push({
+        path: `${item.path}`,
+        redirect: `${item.children[0].path}`
+      })
+      item.children.forEach(children => {
+        getRedirect(children)
+      })
+    }
+  }
+}
+metaData.forEach(getRedirect)
+console.log(redirectData)
 
 const fin = [{
   ...routerConfig['/'],
   path: '/',
-  children: routerHandle(Object.keys(routerConfig))
+  redirect: '/home',
+  children: redirectData.concat(routerHandle(Object.keys(routerConfig)))
 }]
 
 console.log(fin)
