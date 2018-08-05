@@ -2,6 +2,18 @@ import { isUrl } from '../utils/index'
 
 const menuData = [
   {
+    label: '主页',
+    key: 'home',
+    icon: 'table',
+    path: 'home'
+  },
+  {
+    label: '一级列表详情切换',
+    key: 'demo',
+    icon: 'table',
+    path: 'demo/list'
+  },
+  {
     label: 'dashboard',
     key: 'dashboard',
     icon: 'table',

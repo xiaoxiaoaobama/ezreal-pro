@@ -72,6 +72,14 @@ const initRoute = {
     component: () => import('../views/home/home.vue'),
     meta: {}
   },
+  "/demo/list": {
+    component: () => import('../views/demo/list.vue'),
+    meta: {}
+  },
+  "/demo/detail": {
+    component: () => import('../views/demo/detail.vue'),
+    meta: {}
+  },
   "/dashboard/analysis": {
     component: () => import('../views/dashboard/analysis.vue'),
     meta: {}
@@ -93,11 +101,16 @@ const initRoute = {
 const menuData = getFlatMenuData(getMenuData()) // 树形结构转换成平级
 const routerConfig = getFinishRoute() // eslint-disable-line
 
-export default [{
+const fin = [{
   ...routerConfig['/'],
   path: '/',
   children: routerHandle(Object.keys(routerConfig))
 }]
+
+console.log(fin)
+
+export default fin
+
 
 // 最终产出的路由结构
 // const routes = [{

@@ -5,7 +5,9 @@
         class="el-menu-vertical-demo"
         @select="selectHandle"
       >
-        <el-submenu v-for="item in menuList" :key="item.path" :index="item.path">
+        <el-menu-item v-for="item in menuList" v-if="!item.children" :key="item.path" :index="item.path">{{item.label}}</el-menu-item>
+
+        <el-submenu v-for="item in menuList" v-if="item.children" :key="item.path" :index="item.path">
           <template slot="title">
             <i class="el-icon-location"></i>
             <span>{{item.label}}</span>
