@@ -1,0 +1,146 @@
+@import './config.scss';
+
+/* Placeholder
+ -------------------------- */
+@mixin placeholder {
+  &::-webkit-input-placeholder {
+    @content;
+  }
+
+  &::-moz-placeholder {
+    @content;
+  }
+
+  &:-ms-input-placeholder {
+    @content;
+  }
+}
+
+
+// 块（block
+@mixin b($block) {
+  $b: $namespace+'-'+$block !global;
+
+  .#{$b} {
+    @content;
+  }
+}
+
+// 元素（element)
+@mixin e($element) {
+  $e: $element !global;
+  $selector: &;
+  $current-selector: "";
+
+  @each $unit in $element {
+    $current-selector: #{$current-selector + "." + $b + $element-separator + $unit + ","};
+  }
+
+  @if hitAllSpecialNestRule($selector) {
+    @at-root {
+      #{$selector} {
+        #{$current-selector} {
+          @content;
+        }
+      }
+    }
+  }
+
+  @else {
+    @at-root {
+      #{$current-selector} {
+        @content;
+      }
+    }
+  }
+}
+
+// 修饰符（modifier)
+@mixin m($modifier) {
+  $selector: &;
+  $current-selector: "";
+
+  @each $unit in $modifier {
+    $current-selector: #{$current-selector + & + $modifier-separator + $unit + ","};
+  }
+
+  @at-root {
+    #{$current-selector} {
+      @content;
+    }
+  }
+}
+
+@mixin configurable-m($modifier, $E-flag: false) {
+  $selector: &;
+  $interpolation: '';
+
+  @if $E-flag {
+    $interpolation: $element-separator + $E-flag;
+  }
+
+  @at-root {
+    #{$selector} {
+      .#{$b + $interpolation + $modifier-separator + $modifier} {
+        @content;
+      }
+    }
+  }
+}
+
+@mixin spec-selector($specSelector: '', $element: $E, $modifier: false, $block: $B) {
+  $modifier-combo: '';
+
+  @if $modifier {
+    $modifier-combo: $modifier-separator + $modifier;
+  }
+
+  @at-root {
+    #{&}#{$specSelector}.#{$block + $element-separator + $element + $modifier-combo} {
+      @content;
+    }
+  }
+}
+
+@mixin meb($modifier: false, $element: $E, $block: $B) {
+  $selector: &;
+  $modifier-combo: '';
+
+  @if $modifier {
+    $modifier-combo: $modifier-separator + $modifier;
+  }
+
+  @at-root {
+    #{$selector} {
+      .#{$block + $element-separator + $element + $modifier-combo} {
+        @content;
+      }
+    }
+  }
+}
+
+@mixin when($state) {
+  @at-root {
+    &.#{$state-prefix + $state} {
+      @content;
+    }
+  }
+}
+
+@mixin extend-rule($name) {
+  @extend #{'%shared-'+$name};
+}
+
+@mixin share-rule($name) {
+  $rule-name: '%shared-'+$name;
+
+  @at-root #{$rule-name} {
+    @content;
+  }
+}
+
+@mixin pseudo($pseudo) {
+  @at-root #{&}#{':#{$pseudo}'} {
+    @content;
+  }
+}

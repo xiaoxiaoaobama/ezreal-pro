@@ -1,9 +1,18 @@
 <template>
-  <el-container style="height: 500px; border: 1px solid #eee">
-    <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
+  <el-container>
+
+    <el-aside class="aside" width="256px">
+      <div class="logo" key="logo">
+        <router-link to="/">
+          <img :src="logo" alt="logo" />
+          <h1>Ezreal Pro</h1>
+        </router-link>
+      </div>
+
       <el-menu
         class="el-menu-vertical-demo"
         @select="selectHandle"
+        :collapse="isCollapse"
       >
         <el-menu-item v-for="item in menuList" v-if="!item.children" :key="item.path" :index="item.path">{{item.label}}</el-menu-item>
 
@@ -21,7 +30,7 @@
     </el-aside>
 
     <el-container>
-      <el-header style="text-align: right; font-size: 12px">
+      <el-header>
         我是头部
       </el-header>
 
@@ -34,12 +43,15 @@
 
 <script>
 import { getMenuData } from '../menu/menu'
+import logo from '../assets/logo.svg'
 
 export default {
   name: 'BaseLayout',
   data() {
     return {
-      menuList: getMenuData()
+      menuList: getMenuData(),
+      isCollapse: false,
+      logo
     }
   },
   methods: {
@@ -51,5 +63,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+@import './BasicLayout.scss';
+
 </style>
