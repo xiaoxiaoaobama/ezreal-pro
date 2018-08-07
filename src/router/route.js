@@ -121,16 +121,12 @@ const getRedirect = item => {
 metaData.forEach(getRedirect)
 console.log(redirectData)
 
-const fin = [{
+export default [{
   ...routerConfig['/'],
   path: '/',
   redirect: '/home',
   children: redirectData.concat(routerHandle(Object.keys(routerConfig)))
 }]
-
-console.log(fin)
-
-export default fin
 
 
 // 最终产出的路由结构
@@ -141,8 +137,12 @@ export default fin
 //   meta: {},
 //   children: [
 //     {
-//       path: 'dashboard',
-//       redirect: 'dashboard/analysis'
+//       path: '/dashboard',
+//       redirect: '/dashboard/analysis'
+//     },
+//     {
+//       path: '/search',
+//       redirect: '/search/articles'
 //     },
 
 //     {

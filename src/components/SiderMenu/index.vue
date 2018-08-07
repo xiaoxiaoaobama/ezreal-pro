@@ -10,7 +10,7 @@
       <div class="logo" key="logo">
         <router-link to="/">
           <img :src="logo" alt="logo" />
-          <h1>Ezreal Pro</h1>
+          <h1>Ant Design Pro</h1>
         </router-link>
       </div>
 
