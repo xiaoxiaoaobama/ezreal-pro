@@ -1,7 +1,11 @@
 <template>
-  <div class="global-header">
-    <el-button @click="toggleHandle">点击缩放</el-button>
-  </div>
+  <a-layout-header class="global-header">
+    <a-icon
+      class="trigger"
+      :type="value ? 'menu-unfold' : 'menu-fold'"
+      @click="toggleHandle"
+    />
+  </a-layout-header>
 </template>
 
 <script>
@@ -27,6 +31,6 @@ export default {
 }
 </script>
 
-<style lang="scss">
-@import './index.scss';
+<style lang="less">
+@import './index.less';
 </style>

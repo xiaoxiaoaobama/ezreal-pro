@@ -1,21 +1,19 @@
 <template>
-  <el-container class="main-container">
+   <a-layout class="main-container">
     <SiderMenu
       :logo="logo"
       :collapsed="collapsed"
       :width="256"
     />
 
-    <el-container>
-      <el-header height="64px">
-        <GlobalHeader v-model="collapsed" />
-      </el-header>
+    <a-layout>
+      <GlobalHeader v-model="collapsed"/>
 
-      <el-main class="container-content">
+      <a-layout-content class="container-content">
         <router-view />
-      </el-main>
-    </el-container>
-  </el-container>
+      </a-layout-content>
+    </a-layout>
+  </a-layout>
 </template>
 
 <script>
@@ -40,11 +38,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
-@import './BasicLayout.scss';
-.main-container {
-  .el-header {
+<style lang="less">
+@import './BasicLayout.less';
 
-  }
-}
 </style>
