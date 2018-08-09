@@ -2,13 +2,15 @@
   <a-layout-header class="global-header">
     <a-icon
       class="trigger"
-      :type="value ? 'menu-unfold' : 'menu-fold'"
+      :type="collapsed ? 'menu-unfold' : 'menu-fold'"
       @click="toggleHandle"
     />
   </a-layout-header>
 </template>
 
 <script>
+import { mapState, mapMutations } from 'vuex'
+
 export default {
   name: 'GlobalHeader',
   data() {
@@ -16,15 +18,19 @@ export default {
 
     }
   },
+  computed: {
+    ...mapState({
+      collapsed: state => state.app.collapsed
+    })
+  },
   props: {
     logo: String,
-    width: String,
-    value: Boolean
+    width: String
   },
   methods: {
-    toggleHandle() {
-      this.$emit('input', !this.value)
-    }
+    ...mapMutations({
+      toggleHandle: 'toggleCollapsed'
+    })
   },
   created() {
   }

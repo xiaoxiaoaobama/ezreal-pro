@@ -2,43 +2,44 @@ import { isUrl } from '../utils/index'
 
 const menuData = [
   {
-    label: '主页',
+    name: '主页',
     key: 'home',
     icon: 'table',
     path: 'home'
   },
   {
-    label: '一级列表详情切换',
+    name: '一级列表详情切换',
     key: 'demo',
     icon: 'table',
-    path: 'demo/list'
+    path: 'demo/list',
+    hideInMenu: true
   },
   {
-    label: 'dashboard',
+    name: 'dashboard',
     key: 'dashboard',
     icon: 'table',
     path: 'dashboard',
     children: [
       {
-        label: '分析页',
+        name: '分析页',
         key: 'analysis',
         path: 'analysis'
       }
     ]
   },
   {
-    label: '查询页',
+    name: '查询页',
     key: 'search',
     icon: 'table',
     path: 'search',
     children: [
       {
-        label: '搜索列表（文章）',
+        name: '搜索列表（文章）',
         key: 'articles',
         path: 'articles'
       },
       {
-        label: '搜索列表（项目）',
+        name: '搜索列表（项目）',
         key: 'projects',
         path: 'projects'
       }

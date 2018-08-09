@@ -68,7 +68,7 @@ const initRoute = {
     meta: {}
   },
   "/home": {
-    component: () => import('../views/home/home.vue'),
+    component: () => import('../views/home/home'),
     meta: {}
   },
   "/demo/list": {

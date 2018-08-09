@@ -2,12 +2,12 @@
    <a-layout class="main-container">
     <SiderMenu
       :logo="logo"
-      :collapsed="collapsed"
       :width="256"
+      :menuData="menuData"
     />
 
     <a-layout>
-      <GlobalHeader v-model="collapsed"/>
+      <GlobalHeader />
 
       <a-layout-content class="container-content">
         <router-view />
@@ -17,7 +17,8 @@
 </template>
 
 <script>
-import SiderMenu from '../components/SiderMenu/index.vue'
+import { getMenuData } from '../menu/menu'
+import SiderMenu from '../components/SiderMenu/index'
 import GlobalHeader from '../components/GlobalHeader/index.vue'
 import logo from '../assets/logo.svg'
 
@@ -26,7 +27,7 @@ export default {
   data() {
     return {
       logo,
-      collapsed: false
+      menuData: getMenuData()
     }
   },
   methods: {
