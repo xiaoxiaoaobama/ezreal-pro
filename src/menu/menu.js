@@ -12,7 +12,7 @@ const menuData = [
     key: 'demo',
     icon: 'table',
     path: 'demo/list',
-    hideInMenu: true
+    // hideInMenu: true
   },
   {
     name: 'dashboard',
@@ -24,6 +24,13 @@ const menuData = [
         name: '分析页',
         key: 'analysis',
         path: 'analysis'
+        // children: [{
+        //   name: '一级列表详情切换',
+        //   key: 'demo',
+        //   icon: 'table',
+        //   path: 'demo/list',
+        //   hideInMenu: true
+        // }]
       }
     ]
   },

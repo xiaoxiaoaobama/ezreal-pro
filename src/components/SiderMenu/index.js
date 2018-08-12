@@ -1,10 +1,13 @@
 import { mapState } from 'vuex'
+import pathToRegexp from 'path-to-regexp'
+import { urlToList } from '../../utils/index'
 import './index.less'
 
 export default {
   name: 'SiderMenu',
   data() {
     return {
+      openKeys: this.getDefaultCollapsedSubMenus()
     }
   },
   computed: {
@@ -12,7 +15,15 @@ export default {
       collapsed: state => {
         return state.app.collapsed
       }
-    })
+    }),
+    selectedKeys() {
+      const flatMenuKeys = this.getFlatMenuKeys(this.menuData)
+      console.log(flatMenuKeys)
+      console.log(this.$route.path)
+      const aa = this.getSelectedMenuKeys(flatMenuKeys, urlToList(this.$route.path))
+      console.log(aa)
+      return aa
+    }
   },
   props: {
     logo: String,
@@ -24,7 +35,6 @@ export default {
   },
   methods: {
     selectHandle({key}) {
-      console.log(key)
       this.$router.push(key)
     },
     getNavMenuItems(menuData) {
@@ -54,6 +64,31 @@ export default {
           </a-menu-item>
         )
       }
+    },
+    getSelectedMenuKeys(flatMenuKeys, paths) { // 获取选中的菜单key
+      return paths.filter(path => {
+        // return flatMenuKeys.indexOf(path) > -1
+        return flatMenuKeys.filter(item => pathToRegexp(item).test(path))
+      })
+    },
+    getFlatMenuKeys(menuData) {
+      return menuData.reduce((keys, item) => {
+        keys.push(item.path)
+        if (item.children && item.children.length > 0) {
+          return keys.concat(this.getFlatMenuKeys(item.children))
+        }
+        return keys
+      }, [])
+    },
+    getDefaultCollapsedSubMenus() {
+      const flatMenuKeys = this.getFlatMenuKeys(this.menuData)
+      return this.getSelectedMenuKeys(flatMenuKeys, urlToList(this.$route.path))
+    },
+    handleOpenChange(openKeys) {
+      console.log(111)
+      console.log(openKeys)
+      const lastKey = openKeys[openKeys.length - 1]
+      this.openKeys = [lastKey]
     }
   },
   created() {
@@ -80,9 +115,10 @@ export default {
         <a-menu
           mode="inline"
           theme="dark"
-          defaultSelectedKeys={['1']}
-          defaultOpenKeys={['sub1']}
+          openKeys={this.openKeys}
+          selectedKeys={this.selectedKeys}
           on-select={this.selectHandle}
+          on-openChange={this.handleOpenChange}
         >
           {this.getNavMenuItems(this.menuData)}
         </a-menu>
