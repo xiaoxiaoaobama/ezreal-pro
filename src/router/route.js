@@ -1,5 +1,5 @@
 import pathToRegexp from 'path-to-regexp'
-import { getMenuData } from '../menu/menu'
+import { getTotalMenu } from '../menu/menu'
 
 function getFinishRoute() {
   const routerData = {}
@@ -11,10 +11,8 @@ function getFinishRoute() {
       menuItem = menuData[menuKey]
     }
     let router = initRoute[path]
-    router = {
-      ...router,
-      key: router.key || menuItem.key,
-    }
+    router.meta = router.meta || {}
+    router.meta.key = router.meta.key || menuItem.key
     routerData[path] = router
   })
   return routerData
@@ -64,43 +62,38 @@ function routerHandle(paths) {
 // 提供给用户的配置形式
 const initRoute = {
   "/": {
-    component: () => import('../layout/BasicLayout.vue'),
-    meta: {}
+    component: () => import('../layout/BasicLayout.vue')
   },
   "/home": {
     component: () => import('../views/home/home'),
-    meta: {}
+    meta: {
+      aa: 'bb'
+    }
   },
   "/demo/list": {
-    component: () => import('../views/demo/list.vue'),
-    meta: {}
+    component: () => import('../views/demo/list.vue')
   },
   "/demo/detail": {
-    component: () => import('../views/demo/detail.vue'),
-    meta: {}
+    component: () => import('../views/demo/detail.vue')
   },
   "/dashboard/analysis": {
-    component: () => import('../views/dashboard/analysis.vue'),
-    meta: {}
+    component: () => import('../views/dashboard/analysis.vue')
   },
   "/search": {
-    component: () => import('../views/list/search.vue'),
-    meta: {}
+    component: () => import('../views/list/search.vue')
   },
   "/search/articles": {
-    component: () => import('../views/list/articles.vue'),
-    meta: {}
+    component: () => import('../views/list/articles.vue')
   },
   "/search/projects": {
-    component: () => import('../views/list/projects.vue'),
-    meta: {}
+    component: () => import('../views/list/projects.vue')
   }
 }
 
-const metaData = getMenuData()
-const menuData = getFlatMenuData(metaData) // 树形结构转换成平级
+const initMenuData = getTotalMenu()
+const menuData = getFlatMenuData(initMenuData) // 树形结构转换成平级
 const routerConfig = getFinishRoute() // eslint-disable-line
-
+console.log(routerConfig)
 /**
  * 根据菜单取得重定向地址.
  */
@@ -118,58 +111,14 @@ const getRedirect = item => {
     }
   }
 }
-metaData.forEach(getRedirect)
-console.log(redirectData)
+initMenuData.forEach(getRedirect)
 
 export default [{
   ...routerConfig['/'],
   path: '/',
   redirect: '/home',
   children: redirectData.concat(routerHandle(Object.keys(routerConfig)))
+}, {
+  path: '*',
+  redirect: '/'
 }]
-
-
-// 最终产出的路由结构
-// const routes = [{
-//   path: '/',
-//   component: () => import('../layout/BasicLayout.vue'),
-//   redirect: '/home',
-//   meta: {},
-//   children: [
-//     {
-//       path: '/dashboard',
-//       redirect: '/dashboard/analysis'
-//     },
-//     {
-//       path: '/search',
-//       redirect: '/search/articles'
-//     },
-
-//     {
-//       path: '/home',
-//       component: () => import('../views/home/home.vue'),
-//       meta: {}
-//     },
-
-//     {
-//       path: '/dashboard/analysis',
-//       component: () => import('../views/dashboard/analysis.vue'),
-//       meta: {}
-//     },
-
-//     {
-//       path: '/search',
-//       component: () => import('../views/list/search.vue'),
-//       meta: {},
-//       children: [{
-//         path: '/search/articles',
-//         component: () => import('../views/list/articles.vue'),
-//         meta: {}
-//       }, {
-//         path: '/search/projects',
-//         component: () => import('../views/list/projects.vue'),
-//         meta: {}
-//       }]
-//     }
-//   ]
-// }]

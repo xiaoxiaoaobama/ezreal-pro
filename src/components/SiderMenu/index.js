@@ -18,10 +18,10 @@ export default {
     }),
     selectedKeys() {
       const flatMenuKeys = this.getFlatMenuKeys(this.menuData)
-      console.log(flatMenuKeys)
-      console.log(this.$route.path)
+      // console.log(flatMenuKeys)
+      // console.log(this.$route.path)
       const aa = this.getSelectedMenuKeys(flatMenuKeys, urlToList(this.$route.path))
-      console.log(aa)
+      // console.log(aa)
       return aa
     }
   },

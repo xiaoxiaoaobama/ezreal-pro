@@ -17,17 +17,19 @@
 </template>
 
 <script>
-import { getMenuData } from '../menu/menu'
+// import { getMenuData } from '../menu/menu'
+import { getTotalMenu } from '../menu/menu'
 import SiderMenu from '../components/SiderMenu/index'
 import GlobalHeader from '../components/GlobalHeader/index.vue'
 import logo from '../assets/logo.svg'
+// console.log(getTotalMenu())
 
 export default {
   name: 'BaseLayout',
   data() {
     return {
       logo,
-      menuData: getMenuData()
+      menuData: getTotalMenu()
     }
   },
   methods: {
