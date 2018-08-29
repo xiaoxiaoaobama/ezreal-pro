@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "ant-design-vue": "^1.0.2",
+    "mockjs": "^1.0.1-beta3",
     "path-to-regexp": "^2.2.1",
     "vue": "^2.5.16",
     "vue-router": "^3.0.1",

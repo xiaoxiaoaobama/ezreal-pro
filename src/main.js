@@ -3,6 +3,7 @@ import Antd from 'ant-design-vue'
 import router from './router'
 import store from './store'
 import App from './App.vue'
+import Mock from 'mock'
 import 'ant-design-vue/dist/antd.css'
 import './index.less'
 

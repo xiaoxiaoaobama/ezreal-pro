@@ -55,7 +55,6 @@ function routerHandle(paths) {
     }
     cRouter.push(currentRoute)
   }
-
   return cRouter
 }
 
