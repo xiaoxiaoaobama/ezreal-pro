@@ -75,7 +75,7 @@ export default function request(url, options) {
       }
       return response.data
     })
-    .catch(e => {
+    .catch(e => { // eslint-disable-line
       // const { dispatch } = store;
       // const status = e.name;
       // if (status === 401) {
@@ -84,16 +84,16 @@ export default function request(url, options) {
       //   });
       //   return;
       // }
-      if (status === 403) {
-        // dispatch(routerRedux.push('/exception/403'));
-        return;
-      }
-      if (status <= 504 && status >= 500) {
-        // dispatch(routerRedux.push('/exception/500'));
-        return;
-      }
-      if (status >= 404 && status < 422) {
-        // dispatch(routerRedux.push('/exception/404'));
-      }
+      // if (status === 403) {
+      //   // dispatch(routerRedux.push('/exception/403'));
+      //   return;
+      // }
+      // if (status <= 504 && status >= 500) {
+      //   // dispatch(routerRedux.push('/exception/500'));
+      //   return;
+      // }
+      // if (status >= 404 && status < 422) {
+      //   // dispatch(routerRedux.push('/exception/404'));
+      // }
     })
 }

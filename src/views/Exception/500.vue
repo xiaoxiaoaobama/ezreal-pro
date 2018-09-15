@@ -1,6 +1,6 @@
 <template>
   <div>
-    我是404页
+    我是500
   </div>
 </template>
 

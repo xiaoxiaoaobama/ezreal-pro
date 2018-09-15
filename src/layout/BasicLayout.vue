@@ -17,8 +17,6 @@
 </template>
 
 <script>
-import { queryCurrent } from '../services/user'
-import { getTotalMenu } from '../menu/menu'
 import SiderMenu from '../components/SiderMenu/index'
 import GlobalHeader from '../components/GlobalHeader/index.vue'
 import logo from '../assets/logo.svg'
@@ -27,23 +25,21 @@ export default {
   name: 'BaseLayout',
   data() {
     return {
-      logo,
-      menuData: getTotalMenu()
+      logo
+    }
+  },
+  computed: {
+    menuData() {
+      return this.$store.getters.menuData
     }
   },
   methods: {
-    async queryCurrent() {
-      const data = await queryCurrent()
-      console.log(23)
-      console.log(data)
-    }
   },
   components: {
     SiderMenu,
     GlobalHeader
   },
   created() {
-    this.queryCurrent()
   }
 }
 </script>

@@ -1,60 +1,40 @@
-export default {
-  state: {
-    collapsed: false
-  },
-  mutations: {
-    toggleCollapsed (state) {
-      state.collapsed = !state.collapsed
-    }
+import { getMenuData } from '@/menu/menu'
+import { queryUserInfo } from '@/services/user'
+import { SAVE_USER_INFO, TOGGLE_COLLAPSED } from '../mutation.types'
+
+const state = {
+  name: '尚未登录',
+  authMenuKeys: [], // 当前用户可以访问的菜单权限码
+  collapsed: false
+}
+
+const getters = {
+  menuData: ({authMenuKeys}) => {
+    return getMenuData(authMenuKeys)
   }
 }
-// import { getMenuData } from '@/data/menu'
-// import { getUserInfo } from '@/services/common.service'
-// import { UPDATE_USER_INFO, SAVE_SEARCH_PARAMS } from '../mutation.types'
 
-// const state = {
-//   name: '用户',
-//   metaDateRole: '',
-//   indexRole: '',
-//   productline: [],
-//   menuList: [],
-//   pageSearchParams: {}
-// }
+const mutations = {
+  [SAVE_USER_INFO](state, data) {
+    state.name = data.name
+    state.authMenuKeys = data.authMenuKeys
+  },
+  [TOGGLE_COLLAPSED](state) {
+    state.collapsed = !state.collapsed
+  }
+}
 
-// const getters = {
-//   menuData: ({menuList}) => {
-//     return getMenuData(menuList)
-//   }
-// }
+const actions = {
+  async initUserInfo({ commit }) {
+    let data = await queryUserInfo()
+    commit(SAVE_USER_INFO, data)
+    return true
+  }
+}
 
-// const mutations = {
-//   [UPDATE_USER_INFO](state, data) {
-//     state.name = data.name
-//     state.metaDateRole = data.metaDateRole
-//     state.indexRole = data.indexRole
-//     state.productline = data.productline
-//     state.menuList = data.menuList
-//   },
-//   [SAVE_SEARCH_PARAMS](state, {path, params}) {
-//     state.pageSearchParams[path] = params
-//     // console.log(state.pageSearchParams[path])
-//   }
-// }
-
-// const actions = {
-//   async initUserInfo({ commit }) {
-//     let { data } = await getUserInfo()
-//     commit(UPDATE_USER_INFO, data)
-//     return true
-//   },
-//   saveSearchParams({ commit }, {path, params}) {
-//     commit('SAVE_SEARCH_PARAMS', { path, params })
-//   }
-// }
-
-// export default {
-//   state,
-//   getters,
-//   mutations,
-//   actions
-// }
+export default {
+  state,
+  getters,
+  mutations,
+  actions
+}

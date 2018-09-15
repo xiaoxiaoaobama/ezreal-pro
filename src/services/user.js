@@ -1,6 +1,6 @@
 import request from '../utils/request'
 
-export function queryCurrent() {
+export function queryUserInfo() {
   return request('/user/current', {
     method: 'get'
   })

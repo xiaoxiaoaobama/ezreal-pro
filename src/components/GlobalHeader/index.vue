@@ -15,7 +15,6 @@ export default {
   name: 'GlobalHeader',
   data() {
     return {
-
     }
   },
   computed: {
@@ -29,7 +28,7 @@ export default {
   },
   methods: {
     ...mapMutations({
-      toggleHandle: 'toggleCollapsed'
+      toggleHandle: 'TOGGLE_COLLAPSED'
     })
   },
   created() {

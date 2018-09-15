@@ -65,10 +65,7 @@ const initRoute = {
     component: () => import('../layout/BasicLayout.vue')
   },
   "/home": {
-    component: () => import('../views/home/home.vue'),
-    meta: {
-      aa: 'bb'
-    }
+    component: () => import('../views/home/home.vue')
   },
   "/demo/list": {
     component: () => import('../views/demo/list.vue')
@@ -90,7 +87,7 @@ const initRoute = {
     component: () => import('../views/list/projects.vue')
   },
   "/exception/403": {
-    component: () => import('../views/list/projects.vue'),
+    component: () => import('../views/Exception/403.vue'),
     name: '403'
   },
   "/exception/404": {
@@ -98,7 +95,7 @@ const initRoute = {
     name: '404'
   },
   "/exception/500": {
-    component: () => import('../views/list/projects.vue'),
+    component: () => import('../views/Exception/500.vue'),
     name: '500'
   }
 }
@@ -133,5 +130,5 @@ export default [{
   children: redirectData.concat(routerHandle(Object.keys(routerConfig)))
 }, {
   path: '*',
-  redirect: '/exception/404'
+  redirect: '/exception/404',
 }]

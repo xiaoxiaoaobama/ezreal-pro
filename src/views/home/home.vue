@@ -1,7 +1,7 @@
 <template>
   <div>
     我是home
-    <a-menu
+    <!-- <a-menu
       mode="inline"
       theme="dark"
       :openKeys="['sub2', 'sub3']"
@@ -17,7 +17,7 @@
           <a-menu-item key="8">Option 8</a-menu-item>
         </a-sub-menu>
       </a-sub-menu>
-    </a-menu>
+    </a-menu> -->
   </div>
 </template>
 

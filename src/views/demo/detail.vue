@@ -1,7 +1,6 @@
 <template>
   <div>
     我是detail
-    <button @click="clickHandle">去404</button>
   </div>
 </template>
 

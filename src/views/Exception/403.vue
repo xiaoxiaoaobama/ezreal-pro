@@ -1,6 +1,6 @@
 <template>
   <div>
-    我是404页
+    无权限页
   </div>
 </template>
 

@@ -12,16 +12,15 @@ const initMenuData = [
     key: 'demo',
     icon: 'table',
     path: 'demo/list'
-    // hideInMenu: true
   },
   {
     name: 'dashboard',
-    key: 'dashboard',
     icon: 'table',
     path: 'dashboard',
     children: [
       {
         name: '分析页',
+        key: 'dashboard',
         path: 'analysis'
       }
     ]
@@ -30,35 +29,15 @@ const initMenuData = [
     name: '查询页',
     icon: 'table',
     path: 'search',
+    key: 'search',
     children: [
       {
         name: '搜索列表（文章）',
-        path: 'articles',
-        key: 'articles'
+        path: 'articles'
       },
       {
         name: '搜索列表（项目）',
-        path: 'projects',
-        key: 'projects'
-      }
-    ]
-  },
-  {
-    name: '异常页',
-    icon: 'warning',
-    path: 'exception',
-    children: [
-      {
-        name: '403',
-        path: '403'
-      },
-      {
-        name: '404',
-        path: '404'
-      },
-      {
-        name: '500',
-        path: '500'
+        path: 'projects'
       }
     ]
   }
