@@ -13,6 +13,7 @@ function getFinishRoute() {
     let router = initRoute[path]
     router.meta = router.meta || {}
     router.meta.key = router.meta.key || menuItem.key
+    router.name = router.name || menuItem.name
     routerData[path] = router
   })
   return routerData
@@ -64,7 +65,7 @@ const initRoute = {
     component: () => import('../layout/BasicLayout.vue')
   },
   "/home": {
-    component: () => import('../views/home/home'),
+    component: () => import('../views/home/home.vue'),
     meta: {
       aa: 'bb'
     }
@@ -73,7 +74,8 @@ const initRoute = {
     component: () => import('../views/demo/list.vue')
   },
   "/demo/detail": {
-    component: () => import('../views/demo/detail.vue')
+    component: () => import('../views/demo/detail.vue'),
+    name: '详情页'
   },
   "/dashboard/analysis": {
     component: () => import('../views/dashboard/analysis.vue')
@@ -86,6 +88,18 @@ const initRoute = {
   },
   "/search/projects": {
     component: () => import('../views/list/projects.vue')
+  },
+  "/exception/403": {
+    component: () => import('../views/list/projects.vue'),
+    name: '403'
+  },
+  "/exception/404": {
+    component: () => import('../views/Exception/404.vue'),
+    name: '404'
+  },
+  "/exception/500": {
+    component: () => import('../views/list/projects.vue'),
+    name: '500'
   }
 }
 
@@ -119,5 +133,5 @@ export default [{
   children: redirectData.concat(routerHandle(Object.keys(routerConfig)))
 }, {
   path: '*',
-  redirect: '/'
+  redirect: '/exception/404'
 }]

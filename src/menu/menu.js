@@ -42,6 +42,25 @@ const initMenuData = [
         key: 'projects'
       }
     ]
+  },
+  {
+    name: '异常页',
+    icon: 'warning',
+    path: 'exception',
+    children: [
+      {
+        name: '403',
+        path: '403'
+      },
+      {
+        name: '404',
+        path: '404'
+      },
+      {
+        name: '500',
+        path: '500'
+      }
+    ]
   }
 ]
 

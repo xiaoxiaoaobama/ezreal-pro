@@ -17,12 +17,11 @@
 </template>
 
 <script>
-// import { getMenuData } from '../menu/menu'
+import { queryCurrent } from '../services/user'
 import { getTotalMenu } from '../menu/menu'
 import SiderMenu from '../components/SiderMenu/index'
 import GlobalHeader from '../components/GlobalHeader/index.vue'
 import logo from '../assets/logo.svg'
-// console.log(getTotalMenu())
 
 export default {
   name: 'BaseLayout',
@@ -33,10 +32,18 @@ export default {
     }
   },
   methods: {
+    async queryCurrent() {
+      const data = await queryCurrent()
+      console.log(23)
+      console.log(data)
+    }
   },
   components: {
     SiderMenu,
     GlobalHeader
+  },
+  created() {
+    this.queryCurrent()
   }
 }
 </script>
