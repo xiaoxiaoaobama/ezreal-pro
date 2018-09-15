@@ -8,7 +8,7 @@ const initMenuData = [
     path: 'home'
   },
   {
-    name: '一级列表详情切换',
+    name: 'demo页',
     key: 'demo',
     icon: 'table',
     path: 'demo/list'
@@ -20,7 +20,7 @@ const initMenuData = [
     children: [
       {
         name: '分析页',
-        key: 'dashboard',
+        key: 'analysis',
         path: 'analysis'
       }
     ]

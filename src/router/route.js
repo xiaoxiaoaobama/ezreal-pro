@@ -1,6 +1,50 @@
 import pathToRegexp from 'path-to-regexp'
 import { getTotalMenu } from '../menu/menu'
 
+// 提供给用户的平级配置形式
+const initRoute = {
+  "/": {
+    component: () => import('../layout/BasicLayout.vue')
+  },
+  "/home": {
+    component: () => import('../views/home/home.vue')
+  },
+  "/demo/list": {
+    component: () => import('../views/demo/list.vue')
+  },
+  "/demo/detail": {
+    component: () => import('../views/demo/detail.vue'),
+    name: '详情页',
+    meta: {
+      key: 'demo'
+    }
+  },
+  "/dashboard/analysis": {
+    component: () => import('../views/dashboard/analysis.vue')
+  },
+  "/search": {
+    component: () => import('../views/list/search.vue')
+  },
+  "/search/articles": {
+    component: () => import('../views/list/articles.vue')
+  },
+  "/search/projects": {
+    component: () => import('../views/list/projects.vue')
+  },
+  "/exception/403": {
+    component: () => import('../views/Exception/403.vue'),
+    name: '403'
+  },
+  "/exception/404": {
+    component: () => import('../views/Exception/404.vue'),
+    name: '404'
+  },
+  "/exception/500": {
+    component: () => import('../views/Exception/500.vue'),
+    name: '500'
+  }
+}
+
 function getFinishRoute() {
   const routerData = {}
   Object.keys(initRoute).forEach((path) => {
@@ -59,51 +103,11 @@ function routerHandle(paths) {
   return cRouter
 }
 
-// 提供给用户的配置形式
-const initRoute = {
-  "/": {
-    component: () => import('../layout/BasicLayout.vue')
-  },
-  "/home": {
-    component: () => import('../views/home/home.vue')
-  },
-  "/demo/list": {
-    component: () => import('../views/demo/list.vue')
-  },
-  "/demo/detail": {
-    component: () => import('../views/demo/detail.vue'),
-    name: '详情页'
-  },
-  "/dashboard/analysis": {
-    component: () => import('../views/dashboard/analysis.vue')
-  },
-  "/search": {
-    component: () => import('../views/list/search.vue')
-  },
-  "/search/articles": {
-    component: () => import('../views/list/articles.vue')
-  },
-  "/search/projects": {
-    component: () => import('../views/list/projects.vue')
-  },
-  "/exception/403": {
-    component: () => import('../views/Exception/403.vue'),
-    name: '403'
-  },
-  "/exception/404": {
-    component: () => import('../views/Exception/404.vue'),
-    name: '404'
-  },
-  "/exception/500": {
-    component: () => import('../views/Exception/500.vue'),
-    name: '500'
-  }
-}
-
 const initMenuData = getTotalMenu()
-const menuData = getFlatMenuData(initMenuData) // 树形结构转换成平级
-const routerConfig = getFinishRoute() // eslint-disable-line
+const menuData = getFlatMenuData(initMenuData) // 菜单树形结构转换成平级
+const routerConfig = getFinishRoute()
 console.log(routerConfig)
+
 /**
  * 根据菜单取得重定向地址.
  */
